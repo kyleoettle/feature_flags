@@ -21,11 +21,23 @@ builder.Configuration.AddAzureAppConfiguration(options =>
 });
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddSingleton<ITargetingContextAccessor, DemoTargetingContextAccessor>();
-builder.Services.AddFeatureManagement()
+builder.Services.AddScoped<ITargetingContextAccessor, DemoTargetingContextAccessor>();
+builder.Services.AddScopedFeatureManagement()
     .WithTargeting<ITargetingContextAccessor>();
 
+//case insensitive comparison for FeatureManager.
+builder.Services.Configure<TargetingEvaluationOptions>(options =>
+{
+    options.IgnoreCase = true;
+});
+
+//register the services required for automatic refresh.
+builder.Services.AddAzureAppConfiguration();
+
 var app = builder.Build();
+
+//middleware that will call refresh and force a refresh based on the interval
+app.UseAzureAppConfiguration();
 
 app.MapGet("/feature-flag", async (IFeatureManager featureManager) =>
 {
