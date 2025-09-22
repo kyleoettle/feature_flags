@@ -42,10 +42,10 @@ app.MapGet("/feature-flag", async (IFeatureManager featureManager) =>
 
     if (await featureManager.IsEnabledAsync("Demo"))
     {
-        return Results.Ok("Feature DemoTargetFeature is enabled for you");
+        return Results.Ok("Feature Demo is enabled for you");
     }
 
-    return Results.Ok("Feature DemoTargetFeature is disabled for you");
+    return Results.Ok("Feature Demo is disabled for you");
 });
 
 
