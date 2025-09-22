@@ -4,7 +4,6 @@ using Microsoft.FeatureManagement;
 using Microsoft.FeatureManagement.FeatureFilters;
 
 var builder = WebApplication.CreateBuilder(args);
-//https://learn.microsoft.com/en-us/azure/azure-app-configuration/howto-targetingfilter
 
 // Retrieve the endpoint
 string endpoint = builder.Configuration.GetValue<string>("Endpoints:AppConfiguration")
@@ -21,9 +20,8 @@ builder.Configuration.AddAzureAppConfiguration(options =>
 });
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITargetingContextAccessor, DemoTargetingContextAccessor>();
 builder.Services.AddScopedFeatureManagement()
-    .WithTargeting<ITargetingContextAccessor>();
+    .WithTargeting<DemoTargetingContextAccessor>();
 
 //case insensitive comparison for FeatureManager.
 builder.Services.Configure<TargetingEvaluationOptions>(options =>

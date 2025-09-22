@@ -14,12 +14,10 @@ namespace FeatureFlagApi
         public ValueTask<TargetingContext> GetContextAsync()
         {
             var user = _userService.GetCurrentUser();
-            var userId = user.ID;
-            var groups = user.Companies;
             var targetingContext = new TargetingContext
             {
-                UserId = user.ID.ToString(),
-                Groups = user.Companies.Select(x => x.ID.ToString())
+                UserId = user.Name.ToString(),
+                Groups = user.Companies.Select(x => x.Name.ToString())
             };
 
             return new ValueTask<TargetingContext>(targetingContext);

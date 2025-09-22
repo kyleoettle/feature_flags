@@ -2,10 +2,10 @@
 {
     public class UserService : IUserService
     {
+        //Get user related information
         public User GetCurrentUser()
         {
-            //Get user based on your identity provider.
-
+            
             var groups = new List<Companies>
             {
                 new Companies(new Guid("A9726B81-F306-450B-B26B-0EB061700633"), "CompanyA"),
