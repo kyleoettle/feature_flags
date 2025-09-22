@@ -1,5 +1,7 @@
 # Feature Flags Demo (.NET 9.0)
 
+**Created as part of this blog post: https://www.oettle.me/blog/targeted-feature-flags**
+
 This project demonstrates feature flag management in a .NET 9.0 Web API using Azure App Configuration and Microsoft.FeatureManagement. It supports user targeting and dynamic feature control.
 
 ## Prerequisites
