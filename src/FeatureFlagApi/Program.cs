@@ -31,18 +31,18 @@ builder.Services.Configure<TargetingEvaluationOptions>(options =>
     options.IgnoreCase = true;
 });
 
-//register the services required for automatic refresh.
+//register the AzureAppConfigurationRefresherProvider services that's required for automatic refresh.
 builder.Services.AddAzureAppConfiguration();
 
 var app = builder.Build();
 
-//middleware that will call refresh and force a refresh based on the interval
+//middleware that will call refresh based on the refresh interval
 app.UseAzureAppConfiguration();
 
 app.MapGet("/feature-flag", async (IFeatureManager featureManager) =>
 {
 
-    if (await featureManager.IsEnabledAsync("DemoTargetFeature"))
+    if (await featureManager.IsEnabledAsync("Demo"))
     {
         return Results.Ok("Feature DemoTargetFeature is enabled for you");
     }
